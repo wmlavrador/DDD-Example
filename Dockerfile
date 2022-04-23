@@ -14,9 +14,4 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-RUN mkdir -p /home/root/.composer && \
-    chown -R root:root /home/root
-
 WORKDIR /var/www

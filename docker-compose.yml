@@ -17,6 +17,8 @@ services:
     image: mysql:5.7
     container_name: challenge-db
     restart: unless-stopped
+    ports:
+      - "3306:3306"
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
@@ -24,6 +26,8 @@ services:
       MYSQL_USER: ${DB_USERNAME}
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
+    volumes:
+      - mysqldata:/var/lib/mysql
     networks:
       - challenge
 
@@ -43,3 +47,6 @@ networks:
   challenge:
     driver: bridge
 
+volumes:
+  mysqldata:
+    driver: local
