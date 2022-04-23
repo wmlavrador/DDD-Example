@@ -11,18 +11,20 @@ Objetivo do projeto permitir o relacionamento entre Usuarios com Organizações.
 
 ## Requisitos
 
-- Docker
-- Composer
+- [Docker](https://docs.docker.com/engine/install/ubuntu/) 
+- [Composer](https://getcomposer.org/doc/00-intro.md)
 
 ## Por onde começar
-- Tenha o docker instalado no seu ambiente de desenvolvimento. [Saiba Como](https://docs.docker.com/engine/install/ubuntu/)
-- Com docker instalado, crie uma pasta em seu ambiente de desenvolvimento para clonar este repositório
-- navegue até a pasta criada renomeio o arquivo .env.example para .env e execute os comandos abaixo
-- 1 - composer install
-- 2 - php artisan key:generate
-- 3 - docker-compose build app
-- 4 - docker-compose up
-- A aplicação estara disponível em http://localhost
+- Com os requisitos mínimos acima, previamente instalado.
+- Comece clonando este repositório
+- navegue até a pasta criada e renomeio o arquivo .env.example para .env e execute os comandos abaixo
+- 1 - `composer install`
+- 2 - `php artisan key:generate`
+- 3 - `docker-compose build app`
+- 4 - `docker-compose up -d`
+- 5 - `docker-compose exec app php artisan migrate:install`
+
+- A aplicação estará disponível em http://localhost:8000
 
 ## API
 
