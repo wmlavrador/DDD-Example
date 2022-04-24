@@ -10,8 +10,15 @@ class Empresas extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'nome',
+        'cnpj',
+        'endereco'
+    ];
+
+
     public function usuarios()
     {
-        return $this->belongsToMany(Usuarios::class, 'empresas_usuarios', 'id_empresas', 'id_usuarios');
+        return $this->belongsToMany(Usuarios::class, 'empresas_usuarios', 'id_empresa', 'id_usuario');
     }
 }
