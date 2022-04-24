@@ -2,19 +2,19 @@
 
 namespace App\Http\Requests\Empresas\Requests;
 
+use App\Http\Requests\BaseApiRequest;
 use App\Rules\Empresas\RuleExisteUsuario;
-use Illuminate\Foundation\Http\FormRequest;
 
-class RequestCriarEmpresa extends FormRequest
+class RequestCriarEmpresa extends BaseApiRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,17 +22,17 @@ class RequestCriarEmpresa extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'nome' => 'required|max:250',
             'cnpj' => 'required|integer',
             'endereco' => 'required|max:250',
-            'usuarios' => ['required_without:usuarioCriaEmpresa', 'array', RuleExisteUsuario::class]
+            'usuarios' => ['required_without:usuarioCriaEmpresa', 'array', new RuleExisteUsuario]
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'nome.required' => 'Informe o nome da empresa.',
