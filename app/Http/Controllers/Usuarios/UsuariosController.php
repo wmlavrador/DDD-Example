@@ -2,19 +2,30 @@
 
 namespace App\Http\Controllers\Usuarios;
 
+use App\Domain\Context\Usuarios\Repositories\UsuariosRepo;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Usuarios\Requests\RequestCriarUsuarios;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class UsuariosController extends Controller
 {
+    private $UsuariosRepo;
+
+    public function __construct(UsuariosRepo $UsuariosRepo)
+    {
+        $this->UsuariosRepo = $UsuariosRepo;
+    }
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
+        $usuarios = $this->UsuariosRepo->getAll();
+
+        return response()->json(['usuarios' => $usuarios]);
     }
 
     /**
@@ -31,11 +42,13 @@ class UsuariosController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(RequestCriarUsuarios $request): JsonResponse
     {
-        //
+        $novoUsuario = $this->UsuariosRepo->novo($request->toArray());
+
+        return response()->json(['usuario' => $novoUsuario]);
     }
 
     /**
