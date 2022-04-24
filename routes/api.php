@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Usuarios\UsuariosController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\Empresas\EmpresasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,5 +22,5 @@ Route::group(['prefix' => 'usuarios'], function(){
 
 // Contexto de Empresas
 Route::group(['prefix' => 'empresas'], function(){
-    Route::resource('/', UsuariosController::class);
+    Route::resource('/', EmpresasController::class);
 });
