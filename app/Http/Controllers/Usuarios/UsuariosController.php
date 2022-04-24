@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Usuarios;
 
 use App\Domain\Context\Usuarios\Repositories\UsuariosRepo;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Usuarios\Requests\RequestCriarUsuarios;
+use App\Http\Requests\Usuarios\Requests\RequestCriarUsuarios;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -46,7 +46,9 @@ class UsuariosController extends Controller
      */
     public function store(RequestCriarUsuarios $request): JsonResponse
     {
-        $novoUsuario = $this->UsuariosRepo->novo($request->toArray());
+        $validatedData = $request->validated();
+
+        $novoUsuario = $this->UsuariosRepo->novo($validatedData);
 
         return response()->json(['usuario' => $novoUsuario]);
     }
