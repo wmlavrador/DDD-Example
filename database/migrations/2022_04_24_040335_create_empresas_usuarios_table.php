@@ -20,6 +20,7 @@ class CreateEmpresasUsuariosTable extends Migration
         });
     }
 
+
     /**
      * Reverse the migrations.
      *
