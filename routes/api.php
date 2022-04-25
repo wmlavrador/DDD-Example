@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Usuarios\UsuariosController;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\Empresas\EmpresasController;
+use App\Http\Controllers\Empresas\EmpresasController;
 
 /*
 |--------------------------------------------------------------------------
