@@ -31,9 +31,13 @@ class UsuariosRepo implements UsuariosInterface
         return Usuarios::find($id);
     }
 
-    public function atualizar(array $data): Usuarios
+    public function atualizar(array $data): bool
     {
-        // TODO: Implement atualizar() method.
+        $Usuario = Usuarios::where('id', $data['id']);
+        if($Usuario->exists()){
+            return $Usuario->update($data);
+        }
+        return false;
     }
 
     public function apagar(int $id): bool

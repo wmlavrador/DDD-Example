@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Usuarios;
 
 use App\Domain\Context\Empresas\Repositories\EmpresasRepo;
 use App\Domain\Context\Usuarios\Repositories\UsuariosRepo;
-use App\Domain\Context\Usuarios\Usuarios;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Usuarios\Requests\RequestAtualizarUsuario;
 use App\Http\Requests\Usuarios\Requests\RequestCriarUsuarios;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class UsuariosController extends Controller
 {
@@ -106,9 +105,14 @@ class UsuariosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RequestAtualizarUsuario $request, $id)
     {
-        //
+        $data = ['id' => $id] + $request->toArray();
+        $atualizacao = $this->usuariosRepo->atualizar($data);
+
+        $usuarioAtualizado = $this->usuariosRepo->getUsuariosEmpresasById($id);
+
+        return response()->json(['usuario' => $usuarioAtualizado, "sucesso" => $atualizacao]);
     }
 
     /**

@@ -10,7 +10,7 @@ interface UsuariosInterface
     public function getAll(): Collection;
     public function novo(array $data): Usuarios;
     public function find(int $id): Usuarios;
-    public function atualizar(array $data): Usuarios;
+    public function atualizar(array $data): bool;
     public function apagar(int $id): bool;
     public function getUsuariosEmpresasById(int $id): Collection;
 }
