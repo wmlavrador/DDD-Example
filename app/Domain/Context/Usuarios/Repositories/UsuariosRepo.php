@@ -38,7 +38,12 @@ class UsuariosRepo implements UsuariosInterface
 
     public function apagar(int $id): bool
     {
-        // TODO: Implement apagar() method.
+        $Usuario = Usuarios::where('id', $id);
+        if($Usuario->exists()){
+            $Usuario->empresas()->detach();
+            return $Usuario->delete();
+        }
+        return false;
     }
 
     public function getUsuariosEmpresasById($id): Collection
