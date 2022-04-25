@@ -10,11 +10,11 @@ use Illuminate\Http\Request;
 
 class UsuariosController extends Controller
 {
-    private $UsuariosRepo;
+    private $usuariosRepo;
 
     public function __construct(UsuariosRepo $UsuariosRepo)
     {
-        $this->UsuariosRepo = $UsuariosRepo;
+        $this->usuariosRepo = $UsuariosRepo;
     }
     /**
      * Display a listing of the resource.
@@ -23,7 +23,7 @@ class UsuariosController extends Controller
      */
     public function index(): JsonResponse
     {
-        $usuarios = $this->UsuariosRepo->getAll();
+        $usuarios = $this->usuariosRepo->getAll();
 
         return response()->json(['usuarios' => $usuarios]);
     }
@@ -48,7 +48,7 @@ class UsuariosController extends Controller
     {
         $validatedData = $request->validated();
 
-        $novoUsuario = $this->UsuariosRepo->novo($validatedData);
+        $novoUsuario = $this->usuariosRepo->novo($validatedData);
 
         return response()->json(['usuario' => $novoUsuario]);
     }
@@ -57,11 +57,13 @@ class UsuariosController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function show($id)
     {
-        //
+        $usuario = $this->usuariosRepo->find($id);
+
+        return response()->json(['usuario' => $usuario]);
     }
 
     /**
