@@ -117,4 +117,14 @@ class EmpresasController extends Controller
 
         return response()->json(['mensagem' => $mensagem]);
     }
+
+    public function associarUsuarios(Request $request)
+    {
+        // TODO: Implementar lógica para associar o empresa a usuarios.
+    }
+
+    public function desassociarUsuarios(Request $request)
+    {
+        // TODO: Implementar lógica para desassociar o empresas dos usuarios.
+    }
 }
