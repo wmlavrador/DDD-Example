@@ -120,9 +120,9 @@ class UsuariosController extends Controller
     public function destroy($id)
     {
         $usuario = $this->usuariosRepo->apagar($id);
-        $mensagem = "Erro ao tentar remover a Empresa {$id} ";
+        $mensagem = "Erro ao tentar remover o Usuario {$id} ";
         if($usuario){
-            $mensagem = "Empresa removida com sucesso";
+            $mensagem = "Usuario removido com sucesso";
         }
 
         return response()->json(['mensagem' => $mensagem]);
