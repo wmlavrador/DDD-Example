@@ -28,7 +28,8 @@ class RequestCriarEmpresa extends BaseApiRequest
             'nome' => 'required|max:250',
             'cnpj' => 'required|integer',
             'endereco' => 'required|max:250',
-            'usuarios' => ['required_without:usuarioCriaEmpresa', 'array', new RuleExisteUsuario]
+            'usuarios' => ['required_without:usuarioCriaEmpresa', 'array'],
+            'usuarios.*' => [new RuleExisteUsuario]
         ];
     }
 
