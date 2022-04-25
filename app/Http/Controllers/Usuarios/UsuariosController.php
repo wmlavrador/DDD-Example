@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Usuarios\Requests\RequestAtualizarUsuario;
 use App\Http\Requests\Usuarios\Requests\RequestCriarUsuarios;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class UsuariosController extends Controller
 {
@@ -130,5 +131,15 @@ class UsuariosController extends Controller
         }
 
         return response()->json(['mensagem' => $mensagem]);
+    }
+
+    public function associarEmpresas(Request $request)
+    {
+        // TODO: Implementar lógica para associar o usuario a empresas.
+    }
+
+    public function desassociarEmpresas(Request $request)
+    {
+        // TODO: Implementar lógica para desassociar o usuario das empresas.
     }
 }
