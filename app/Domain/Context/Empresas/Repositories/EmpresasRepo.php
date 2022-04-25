@@ -38,7 +38,16 @@ class EmpresasRepo implements EmpresasInterface
 
     public function apagar(int $id): bool
     {
-        // TODO: Implement apagar() method.
+        try {
+            $Empresa = Empresas::findOrFail($id);
+            $usuarios = $Empresa->usuarios();
+            if(!empty($usuarios)){
+                $usuarios->detach();
+            }
+            return $Empresa->delete();
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
     public function getEmpresasUsuariosById(int $id): Collection

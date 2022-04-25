@@ -97,10 +97,16 @@ class EmpresasController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function destroy($id)
     {
-        //
+        $empresa = $this->empresasRepo->apagar($id);
+        $mensagem = "Erro ao tentar remover a Empresa {$id} ";
+        if($empresa){
+            $mensagem = "Empresa removida com sucesso";
+        }
+
+        return response()->json(['mensagem' => $mensagem]);
     }
 }
