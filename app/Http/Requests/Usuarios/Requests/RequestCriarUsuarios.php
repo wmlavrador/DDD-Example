@@ -17,7 +17,8 @@ class RequestCriarUsuarios extends BaseApiRequest
             'empresas.*' => ['integer', new RuleExisteEmpresa],
             'usuarioCriaEmpresa' => 'array',
             'usuarioCriaEmpresa.*' => 'requiredIf:empresas,null',
-            'dataNascimento' => 'sometimes|date'
+            'data_de_nascimento' => 'sometimes|date',
+            'naturalidade' => 'string|max:250',
         ];
 
         $empresaRulesNested = $this->getNestedArray('usuarioCriaEmpresa.*.', $this->rulesEmpresa());
