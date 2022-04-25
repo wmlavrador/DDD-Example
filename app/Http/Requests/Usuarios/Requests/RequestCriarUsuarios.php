@@ -13,7 +13,7 @@ class RequestCriarUsuarios extends BaseApiRequest
         $rulesUsuario = [
             'nome' => 'required|max:250',
             'email' => 'required|email|max:250',
-            'empresas' => 'sometimes|array',
+            'empresas' => 'requiredIf:usuarioCriaEmpresa,null|array',
             'empresas.*' => ['integer', new RuleExisteEmpresa],
             'usuarioCriaEmpresa' => 'array',
             'usuarioCriaEmpresa.*' => 'requiredIf:empresas,null',
@@ -30,6 +30,7 @@ class RequestCriarUsuarios extends BaseApiRequest
         $messagesUsuario = [
           'nome.required' => 'Informe o nome',
           'nome.max' => 'Tamanho máximo atingido (250)',
+          'empresas.required_if' => "Informe as empresas que deseja associar, ou crie uma empresa associada.",
           'usuarioCriaEmpresa.required_if' => 'Informe os dados para criar a empresa, ou informe uma/mais empresa(s) já existente(s) no campo \'empresas\' ',
           'dataNascimento.date' => 'Formato de data inválido.'
         ];
