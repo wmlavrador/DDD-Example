@@ -2,6 +2,7 @@
 
 namespace App\Rules\Usuarios;
 
+use App\Domain\Context\Empresas\Empresas;
 use Illuminate\Contracts\Validation\Rule;
 
 class RuleExisteEmpresa implements Rule
@@ -16,7 +17,7 @@ class RuleExisteEmpresa implements Rule
      */
     public function passes($attribute, $value)
     {
-        return true;
+        return Empresas::where('id', $value)->exists();
     }
 
     /**
@@ -26,6 +27,6 @@ class RuleExisteEmpresa implements Rule
      */
     public function message()
     {
-        return 'Verifique se as empresas informadas realmente existem, você deve passar um array com os ID\'s das empresas';
+        return 'Verifique se a empresa código :input realmente existem.';
     }
 }
