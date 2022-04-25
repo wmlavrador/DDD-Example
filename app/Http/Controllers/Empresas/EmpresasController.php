@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Empresas\Requests\RequestCriarEmpresa;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Psy\Util\Json;
 
 class EmpresasController extends Controller
 {
@@ -63,11 +62,12 @@ class EmpresasController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function show($id)
     {
-        //
+        $empresa = $this->empresasRepo->getEmpresasUsuariosById($id);
+        return response()->json(["empresa" => $empresa]);
     }
 
     /**
