@@ -115,10 +115,16 @@ class UsuariosController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function destroy($id)
     {
-        //
+        $usuario = $this->usuariosRepo->apagar($id);
+        $mensagem = "Erro ao tentar remover a Empresa {$id} ";
+        if($usuario){
+            $mensagem = "Empresa removida com sucesso";
+        }
+
+        return response()->json(['mensagem' => $mensagem]);
     }
 }
