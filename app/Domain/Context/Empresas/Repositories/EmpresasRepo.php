@@ -31,9 +31,13 @@ class EmpresasRepo implements EmpresasInterface
         // TODO: Implement find() method.
     }
 
-    public function atualizar(array $data): Empresas
+    public function atualizar(array $data): bool
     {
-        // TODO: Implement atualizar() method.
+        $Empresa = Empresas::where('id', $data['id']);
+        if($Empresa->exists()){
+            return $Empresa->update($data);
+        }
+        return false;
     }
 
     public function apagar(int $id): bool

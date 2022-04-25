@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Empresas;
 
 use App\Domain\Context\Empresas\Repositories\EmpresasRepo;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Empresas\Requests\RequestAtualizarEmpresa;
 use App\Http\Requests\Empresas\Requests\RequestCriarEmpresa;
+use http\Env\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -84,13 +86,19 @@ class EmpresasController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(RequestAtualizarEmpresa $request, $id)
     {
-        //
+        $data = ['id' => $id] + $request->toArray();
+
+        $atualizcao = $this->empresasRepo->atualizar($data);
+
+        $empresaAtualizada = $this->empresasRepo->getEmpresasUsuariosById($id);
+
+        return response()->json(['empresa' => $empresaAtualizada, "sucesso" => $atualizcao]);
     }
 
     /**
