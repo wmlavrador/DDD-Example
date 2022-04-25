@@ -16,11 +16,15 @@ use App\Http\Controllers\Empresas\EmpresasController;
 */
 
 // Contexto de Usuarios
+Route::resource('usuarios', UsuariosController::class);
 Route::group(['prefix' => 'usuarios'], function(){
-    Route::resource('/', UsuariosController::class);
+    Route::put('desassociar-empresas', [UsuariosController::class, 'desassociarEmpresas']);
+    Route::put('associar-empresas', [UsuariosController::class, 'associarEmpresas']);
 });
 
 // Contexto de Empresas
+Route::resource('empresas', EmpresasController::class);
 Route::group(['prefix' => 'empresas'], function(){
-    Route::resource('/', EmpresasController::class);
+    Route::put('desassociar-usuarios', [EmpresasController::class, 'desassociarUsuarios']);
+    Route::put('associar-usuarios', [EmpresasController::class, 'associarUsuarios']);
 });
