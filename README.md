@@ -28,5 +28,5 @@ Objetivo do projeto permitir o relacionamento entre Usuarios com Organizações.
 
 ## API
 
-- [Documentação da API](https://laravel.com/docs/container).
+- [Documentação da API](https://documenter.getpostman.com/view/3032173/UyrBjc5E).
 
