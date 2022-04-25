@@ -12,4 +12,5 @@ interface UsuariosInterface
     public function find(int $id): Usuarios;
     public function atualizar(array $data): Usuarios;
     public function apagar(int $id): bool;
+    public function getUsuariosEmpresasById(int $id): Collection;
 }

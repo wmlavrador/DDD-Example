@@ -16,16 +16,19 @@ class UsuariosRepo implements UsuariosInterface
 
     public function novo(array $data): Usuarios
     {
-        $newUsuario = Usuarios::create($data);
-
-        $newUsuario->save();
+        try {
+            $newUsuario = Usuarios::create($data);
+            $newUsuario->save();
+        } catch (\Exception $e){
+            throw new \Exception('Não foi possível cadastrar o novo usuario.');
+        }
 
         return $newUsuario;
     }
 
     public function find(int $id): Usuarios
     {
-        // TODO: Implement get() method.
+        return Usuarios::find($id);
     }
 
     public function atualizar(array $data): Usuarios
@@ -36,5 +39,10 @@ class UsuariosRepo implements UsuariosInterface
     public function apagar(int $id): bool
     {
         // TODO: Implement apagar() method.
+    }
+
+    public function getUsuariosEmpresasById($id): Collection
+    {
+        return Usuarios::where('id', $id)->with('empresas')->get();
     }
 }

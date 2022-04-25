@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Usuarios;
 
+use App\Domain\Context\Empresas\Repositories\EmpresasRepo;
 use App\Domain\Context\Usuarios\Repositories\UsuariosRepo;
+use App\Domain\Context\Usuarios\Usuarios;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Usuarios\Requests\RequestCriarUsuarios;
 use Illuminate\Http\JsonResponse;
@@ -11,10 +13,15 @@ use Illuminate\Http\Request;
 class UsuariosController extends Controller
 {
     private $usuariosRepo;
+    private $empresasRepo;
 
-    public function __construct(UsuariosRepo $UsuariosRepo)
+    public function __construct(
+        UsuariosRepo $UsuariosRepo,
+        EmpresasRepo $EmpresasRepo
+    )
     {
         $this->usuariosRepo = $UsuariosRepo;
+        $this->empresasRepo = $EmpresasRepo;
     }
     /**
      * Display a listing of the resource.
@@ -50,6 +57,22 @@ class UsuariosController extends Controller
 
         $novoUsuario = $this->usuariosRepo->novo($validatedData);
 
+        if($novoUsuario && $request->has('empresas') ){
+            $novoUsuario->empresas()->attach($validatedData['empresas']);
+        }
+
+        if($novoUsuario && $request->has('usuarioCriaEmpresa')){
+            $criarEmpresas = $validatedData['usuarioCriaEmpresa'];
+
+            foreach ($criarEmpresas as $empresa) {
+                $novaEmpresa = $this->empresasRepo->novo($empresa);
+                $novaEmpresa->usuarios()->attach($novoUsuario->id);
+            }
+
+        }
+
+        $novoUsuario = $this->usuariosRepo->getUsuariosEmpresasById($novoUsuario->id);
+
         return response()->json(['usuario' => $novoUsuario]);
     }
 
@@ -62,7 +85,6 @@ class UsuariosController extends Controller
     public function show($id)
     {
         $usuario = $this->usuariosRepo->find($id);
-
         return response()->json(['usuario' => $usuario]);
     }
 
