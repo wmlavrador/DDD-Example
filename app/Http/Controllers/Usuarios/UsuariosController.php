@@ -84,7 +84,7 @@ class UsuariosController extends Controller
      */
     public function show($id)
     {
-        $usuario = $this->usuariosRepo->find($id);
+        $usuario = $this->usuariosRepo->getUsuariosEmpresasById($id);
         return response()->json(['usuario' => $usuario]);
     }
 
