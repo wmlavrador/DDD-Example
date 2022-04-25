@@ -2,6 +2,8 @@
 
 namespace App\Rules\Empresas;
 
+use App\Domain\Context\Usuarios\Repositories\UsuariosRepo;
+use App\Domain\Context\Usuarios\Usuarios;
 use Illuminate\Contracts\Validation\Rule;
 
 class RuleExisteUsuario implements Rule
@@ -15,7 +17,7 @@ class RuleExisteUsuario implements Rule
      */
     public function passes($attribute, $value)
     {
-        return true;
+        return Usuarios::where('id', $value)->exists();
     }
 
     /**
@@ -25,6 +27,6 @@ class RuleExisteUsuario implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'Usuário (:input) não existe, cadastre o usuario e tente novamente.';
     }
 }
