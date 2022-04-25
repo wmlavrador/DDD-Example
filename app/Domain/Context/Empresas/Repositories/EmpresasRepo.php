@@ -40,4 +40,9 @@ class EmpresasRepo implements EmpresasInterface
     {
         // TODO: Implement apagar() method.
     }
+
+    public function getEmpresasUsuariosById(int $id): Collection
+    {
+        return Empresas::where('id', $id)->with('usuarios')->get();
+    }
 }

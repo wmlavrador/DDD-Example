@@ -54,7 +54,9 @@ class EmpresasController extends Controller
             $empresa->usuarios()->attach($request->usuarios);
         }
 
-        return response()->json(['empresa' => $empresa]);
+        $novaEmpresa = $this->empresasRepo->getEmpresasUsuariosById($empresa->id);
+
+        return response()->json(['empresa' => $novaEmpresa]);
     }
 
     /**
